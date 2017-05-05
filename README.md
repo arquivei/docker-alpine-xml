@@ -1,5 +1,4 @@
-#
-* docker-alpine-xml
+# docker-alpine-xml
 
 Alpine image with the following packages:
 
