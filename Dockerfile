@@ -1,10 +1,13 @@
-FROM alpine
+FROM golang:alpine
 MAINTAINER Arquivei
 
 RUN apk update && \
     apk upgrade && \
-    apk add libxml2 xmlsec openssl tzdata
+    apk add --no-cache make gcc musl-dev libxml2-dev xmlsec-dev openssl-dev tzdata
 
-ONBUILD ARG TZ=America/Sao_Paulo
-ONBUILD ENV TZ $TZ
-ONBUILD RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+EXPOSE 80
+
+ENTRYPOINT make
